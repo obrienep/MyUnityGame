@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class RubyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float smoothing = 5f;
-    void Start()
+    [SerializeField]
+    private float CharacterSpeed = 1.0f;
+    private Vector2 InputDir;
+
+    public Rigidbody2D PlayerPhysics;
+
+    // collect references
+    void Awake()
     {
-        
+
+        PlayerPhysics = GetComponent<Rigidbody2D>();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Debug.Log(horizontal);
-        Debug.Log(vertical);
-        Vector2 position = transform.position;
-        position.x = position.x + 0.1f * horizontal;
-        position.y = position.y + 0.1f * vertical;
-        transform.position = position;
+
+        float VertInput = Input.GetAxis("Vertical");
+        float HorInput = Input.GetAxis("Horizontal");
+        InputDir = new Vector2(HorInput, VertInput).normalized;
+
+    }
+
+    void FixedUpdate()
+    {
+
+        Vector2 WhereAmI = PlayerPhysics.position;
+        Vector2 WhereTo = WhereAmI + (InputDir * CharacterSpeed) * Time.fixedDeltaTime;
+        PlayerPhysics.MovePosition(WhereTo);
+
     }
 }
