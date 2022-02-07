@@ -5,6 +5,7 @@ using UnityEngine;
 public class RubyController : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float smoothing = 5f;
     void Start()
     {
         
