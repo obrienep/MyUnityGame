@@ -2471,11 +2471,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1565965705}
   - component: {fileID: 1565965704}
-  - component: {fileID: 1565965706}
   - component: {fileID: 1565965707}
   - component: {fileID: 1565965708}
+  - component: {fileID: 1565965709}
+  - component: {fileID: 1565965706}
   m_Layer: 0
-  m_Name: Ruby
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2521,7 +2522,7 @@ SpriteRenderer:
   m_SortingLayerID: 1799634239
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 34bcc69173f8a08488a60f4f535a89a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63e7c8c9d53b779409368c92d6179a62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2558,8 +2559,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9852b160d3a6962438f53aced45b77be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterSpeed: 3
+  CharacterSpeed: 1
   PlayerPhysics: {fileID: 1565965707}
+  animator: {fileID: 1565965709}
 --- !u!50 &1565965707
 Rigidbody2D:
   serializedVersion: 4
@@ -2598,7 +2600,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2607,6 +2609,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.65158534, y: 0.4988354}
   m_EdgeRadius: 0
+--- !u!95 &1565965709
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565965703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40259ec5cdb23c84c853a5851090e357, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1735303198
 GameObject:
   m_ObjectHideFlags: 0
