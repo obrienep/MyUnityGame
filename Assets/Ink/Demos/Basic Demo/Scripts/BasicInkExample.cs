@@ -6,6 +6,7 @@ using Ink.Runtime;
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class BasicInkExample : MonoBehaviour {
     public static event Action<Story> OnCreateStory;
+	public GameObject box;
 	
     void Awake () {
 		// Remove the default message
@@ -50,10 +51,7 @@ public class BasicInkExample : MonoBehaviour {
 		}
 		// If we've read all the content and there's no choices, the story is finished!
 		else {
-			Button choice = CreateChoiceView("End of story.\nRestart?");
-			choice.onClick.AddListener(delegate{
-				StartStory();
-			});
+				box.SetActive(false);
 		}
 	}
 
