@@ -11,7 +11,25 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D PlayerPhysics;
     public Animator animator;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+    public ManaBar manaBar;
+
+    public int maxMana = 100;
+    public float currentMana;
+    public float manaRegen = 3f;
+
     // collect references
+    void Start() 
+    {
+        currentHealth = maxHealth;
+        healthBar.setMaxHealth(maxHealth);
+        currentMana = maxMana;
+        manaBar.setMaxMana(maxMana);
+        manaRegen = 3f;
+    }
     void Awake()
     {
 
@@ -30,6 +48,7 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
         InputDir = new Vector2(HorInput, VertInput).normalized;
         Vector3 characterScale = transform.localScale;
+
         if (Input.GetAxis("Horizontal") < 0) {
             characterScale.x = -1;
         }
@@ -40,12 +59,44 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Speed", (Mathf.Abs(VertInput) + Mathf.Abs(HorInput)));
 
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ConsumeMana(20);
+        }
+        if (currentMana < maxMana) 
+        {   
+            currentMana += manaRegen * Time.deltaTime;
+            manaBar.setMana(Mathf.RoundToInt(currentMana));
+        }
+
+        if (currentMana > maxMana) 
+        {
+            currentMana = maxMana;
+        }
+    }
+
+    void TakeDamage (int damage) 
+    {
+        currentHealth -= damage;
+
+        healthBar.setHealth(currentHealth);
+    }
+
+        void ConsumeMana (int cost) 
+    {
+        currentMana -= cost;
+
+        manaBar.setMana(Mathf.RoundToInt(currentMana));
 
     }
 
     void FixedUpdate()
     {
-
+        
     }
 }
