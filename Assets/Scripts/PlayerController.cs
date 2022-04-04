@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public int maxMana = 100;
     public float currentMana;
     public float manaRegen = 3f;
+    AudioSource audioSrc;
+
+    bool isMoving = false;
 
     // collect references
     void Start() 
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
         currentMana = maxMana;
         manaBar.setMaxMana(maxMana);
         manaRegen = 3f;
+        audioSrc = GetComponent<AudioSource> ();
     }
     void Awake()
     {
@@ -48,6 +52,16 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
         InputDir = new Vector2(HorInput, VertInput).normalized;
         Vector3 characterScale = transform.localScale;
+
+        if (VertInput != 0 || HorInput != 0) {
+            isMoving = true;
+        } else {isMoving = false;}
+
+        if (isMoving == true) {
+            if (!audioSrc.isPlaying) {
+            audioSrc.Play();
+            }
+        } else {audioSrc.Stop();}
 
         if (Input.GetAxis("Horizontal") < 0) {
             characterScale.x = -1;
