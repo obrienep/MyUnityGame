@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public float currentMana;
     public float manaRegen = 3f;
     AudioSource audioSrc;
+
+    public ProjectileBehavior ProjectilePrefab;
+    public Transform LaunchOffset;
 
     bool isMoving = false;
 
@@ -64,10 +68,10 @@ public class PlayerController : MonoBehaviour
         } else {audioSrc.Stop();}
 
         if (Input.GetAxis("Horizontal") < 0) {
-            characterScale.x = -1;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         if (Input.GetAxis("Horizontal") > 0) {
-            characterScale.x = 1;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         transform.localScale = characterScale;
 
@@ -92,6 +96,19 @@ public class PlayerController : MonoBehaviour
         {
             currentMana = maxMana;
         }
+
+        if (currentHealth <= 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (currentMana < 0) {
+            currentMana = 0;
+        }
+
+        if(Input.GetButtonDown("Fire1")) 
+        {
+            Instantiate(ProjectilePrefab,LaunchOffset.position, LaunchOffset.rotation);
+        }
     }
 
     void TakeDamage (int damage) 
@@ -108,6 +125,12 @@ public class PlayerController : MonoBehaviour
         manaBar.setMana(Mathf.RoundToInt(currentMana));
 
     }
+
+        private void OnCollisionEnter2D(Collision2D collision) {
+            if (collision.collider.gameObject.CompareTag("Enemy")) {
+                TakeDamage(1);
+            }
+        }
 
     void FixedUpdate()
     {
