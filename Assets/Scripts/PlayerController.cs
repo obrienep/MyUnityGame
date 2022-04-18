@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public int maxMana = 100;
     public float currentMana;
-    public float manaRegen = 3f;
+    public float manaRegen = 1f;
     AudioSource audioSrc;
 
     public ProjectileBehavior ProjectilePrefab;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
         currentMana = maxMana;
         manaBar.setMaxMana(maxMana);
-        manaRegen = 3f;
+        manaRegen = 15f;
         audioSrc = GetComponent<AudioSource> ();
     }
     void Awake()
@@ -107,7 +107,10 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1")) 
         {
+            if (currentMana >= 20) {
             Instantiate(ProjectilePrefab,LaunchOffset.position, LaunchOffset.rotation);
+            ConsumeMana(20);
+            }
         }
     }
 
@@ -128,7 +131,10 @@ public class PlayerController : MonoBehaviour
 
         private void OnCollisionEnter2D(Collision2D collision) {
             if (collision.collider.gameObject.CompareTag("Enemy")) {
-                TakeDamage(1);
+                TakeDamage(10);
+            }
+            if (collision.collider.gameObject.CompareTag("projectile")) {
+                TakeDamage(20);
             }
         }
 
