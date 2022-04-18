@@ -8437,21 +8437,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7943353069876118260, guid: 6f36189067ba383409ba731c3de18ff6, type: 3}
   m_PrefabInstance: {fileID: 5710888780909335954}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2413175816963020647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2413175816963020646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92498ef8715a1464ea4fe6b647873d06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  isColliding: 0
 --- !u!1001 &5710888780909335954
 PrefabInstance:
   m_ObjectHideFlags: 0
